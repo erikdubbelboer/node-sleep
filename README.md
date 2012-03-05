@@ -4,7 +4,7 @@ sleep
 
 Add sleep() and usleep() to nodejs.
 
-This is mainly useful for debugging. The sleep calls will block execution!
+This is mainly useful for debugging. **Sleep() will block execution!**
 
 Usage
 -----
