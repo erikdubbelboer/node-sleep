@@ -1,4 +1,6 @@
 
+#define BUILDING_NODE_EXTENSION
+
 #include <v8.h>
 #include <node.h>
 

@@ -1,6 +1,6 @@
 {
   "name":        "sleep",
-  "version":     "1.0.0",
+  "version":     "1.0.2",
   "main":        "./build/Release/sleep.node",
   "description": "Add sleep() and usleep() to nodejs",
   "homepage":    "http://github.com/ErikDubbelboer/node-sleep",
