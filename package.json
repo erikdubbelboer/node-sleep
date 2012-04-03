@@ -1,7 +1,7 @@
 {
   "name":        "sleep",
-  "version":     "1.0.2",
-  "main":        "./build/Release/sleep.node",
+  "version":     "1.1.0",
+  "main":        "./index.js",
   "description": "Add sleep() and usleep() to nodejs",
   "homepage":    "http://github.com/ErikDubbelboer/node-sleep",
   "author":      "Erik Dubbelboer <erik@dubbelboer.com>",
@@ -15,5 +15,8 @@
       "type": "git",
       "url":  "https://github.com/ErikDubbelboer/node-sleep.git"
     }
-  ]
+  ],
+  "scripts": {
+    "preinstall": "node build.js"
+  }
 }

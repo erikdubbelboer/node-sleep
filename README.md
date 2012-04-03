@@ -6,6 +6,8 @@ Add sleep() and usleep() to nodejs.
 
 This is mainly useful for debugging. **Sleep() will block execution!**
 
+On windows the module will fall back to a while loop which will use 100% CPU!
+
 Usage
 -----
 
