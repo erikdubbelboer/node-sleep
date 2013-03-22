@@ -17,6 +17,6 @@
     }
   ],
   "scripts": {
-    "preinstall": "node build.js"
+    "preinstall": "node build.js || nodejs build.js"
   }
 }
