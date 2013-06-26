@@ -18,3 +18,8 @@ Usage
 * `sleep.sleep(n)`: sleep for n seconds
 * `sleep.usleep(n)`: sleep for n microseconds (1 second is 1000000 microseconds)
 
+Update
+------
+
+Now bulids properly using node-gyp :)
+
