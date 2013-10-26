@@ -43,3 +43,8 @@ extern "C" void init(Handle<Object> target) {
   NODE_SET_METHOD(target, "usleep", USleep);
 }
 
+
+#ifdef NODE_MODULE
+NODE_MODULE(sleep, init)
+#endif
+
