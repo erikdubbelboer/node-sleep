@@ -1,5 +1,5 @@
 
-var sleep = require('./index.js');
+var sleep = require('./');
 
 console.log('sleeping for 1 seconds...');
 sleep.sleep(1);
