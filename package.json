@@ -1,7 +1,7 @@
 {
   "name":        "sleep",
   "version":     "1.1.2",
-  "main":        "./index.js",
+  "main":        "./lib/index.js",
   "description": "Add sleep() and usleep() to nodejs",
   "homepage":    "http://github.com/ErikDubbelboer/node-sleep",
   "author":      "Erik Dubbelboer <erik@dubbelboer.com>",
@@ -16,8 +16,11 @@
       "url":  "https://github.com/ErikDubbelboer/node-sleep.git"
     }
   ],
+  "dependencies": {
+      "mkdirp":"~0.3.5"
+  },
   "scripts": {
-    "preinstall": "node build.js || nodejs build.js"
+    "install": "node build.js || nodejs build.js"
   },
   "gypfile": true
 }

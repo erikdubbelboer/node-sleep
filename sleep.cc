@@ -45,6 +45,6 @@ extern "C" void init(Handle<Object> target) {
 
 
 #ifdef NODE_MODULE
-NODE_MODULE(sleep, init)
+NODE_MODULE(node_sleep, init)
 #endif
 
