@@ -1,6 +1,6 @@
 {
   "name":        "sleep",
-  "version":     "1.1.2",
+  "version":     "1.1.3",
   "main":        "./lib/index.js",
   "description": "Add sleep() and usleep() to nodejs",
   "homepage":    "http://github.com/ErikDubbelboer/node-sleep",
@@ -10,6 +10,10 @@
     "sleep",
     "usleep"
   ],
+  "repository": {
+    "type": "git",
+    "url":  "https://github.com/ErikDubbelboer/node-sleep.git"
+  },
   "repositories": [
     {
       "type": "git",
