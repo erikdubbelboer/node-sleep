@@ -6,7 +6,28 @@
 #include <v8.h>
 #include <node.h>
 
-#include <unistd.h>
+#ifdef WIN32
+unsigned int sleep(unsigned int seconds)
+{
+    Sleep(seconds * 1000);
+    return 0;
+}
+int usleep(unsigned __int64 usec)
+{
+    LARGE_INTEGER li;
+    li.QuadPart = -10 * usec;     // negative values for relative time
+
+    HANDLE timer = CreateWaitableTimer(NULL, TRUE, NULL);
+    if(!timer) return -1;
+
+    SetWaitableTimer(timer, &li, 0, NULL, NULL, 0);
+    WaitForSingleObject(timer, INFINITE);
+    CloseHandle(timer);
+    return 0;
+}
+#else
+#   include <unistd.h>
+#endif //WIN32
 
 
 using namespace v8;
