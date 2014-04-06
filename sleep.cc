@@ -1,4 +1,3 @@
-
 #ifndef BUILDING_NODE_EXTENSION
 #define BUILDING_NODE_EXTENSION
 #endif // BUILDING_NODE_EXTENSION
@@ -6,7 +5,7 @@
 #include <v8.h>
 #include <node.h>
 
-#ifdef WIN32
+#ifdef _WIN32 || _WIN64
 unsigned int sleep(unsigned int seconds)
 {
     Sleep(seconds * 1000);
@@ -27,7 +26,7 @@ int usleep(unsigned __int64 usec)
 }
 #else
 #   include <unistd.h>
-#endif //WIN32
+#endif
 
 
 using namespace v8;
