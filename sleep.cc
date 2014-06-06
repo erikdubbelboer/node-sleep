@@ -5,6 +5,24 @@
 #include <v8.h>
 #include <node.h>
 
+
+// Node 0.11+
+#if (NODE_MODULE_VERSION > 0x000B)
+#define SCOPE Isolate* isolate = Isolate::GetCurrent(); \
+              HandleScope scope(isolate)
+#define EXCEPTION(str) isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, str)))
+#define ARGUMENTS FunctionCallbackInfo<Value>
+#define RETURNTYPE void
+#define RETURN
+#else
+#define SCOPE HandleScope scope
+#define EXCEPTION(str) return ThrowException(Exception::TypeError(String::New(str))) 
+#define ARGUMENTS Arguments
+#define RETURNTYPE Handle<Value>
+#define RETURN return scope.Close(Undefined())
+#endif
+
+
 #if defined _WIN32 || defined _WIN64
 unsigned int sleep(unsigned int seconds)
 {
@@ -33,28 +51,28 @@ using namespace v8;
 using namespace node;
 
 
-Handle<Value> Sleep(const Arguments& args) {
-  HandleScope scope;
+RETURNTYPE Sleep(const ARGUMENTS& args) {
+  SCOPE;
 
   if (args.Length() < 1 || !args[0]->IsUint32()) {
-    return ThrowException(Exception::TypeError(String::New("Expected number of seconds")));
+    EXCEPTION("Expected number of seconds");
   }
 
   sleep(args[0]->Uint32Value());
 
-  return scope.Close(Undefined());
+  RETURN;
 }
 
-Handle<Value> USleep(const Arguments& args) {
-  HandleScope scope;
+RETURNTYPE USleep(const ARGUMENTS& args) {
+  SCOPE;
 
   if (args.Length() < 1 || !args[0]->IsUint32()) {
-    return ThrowException(Exception::TypeError(String::New("Expected number of micro")));
+    EXCEPTION("Expected number of micro");
   }
 
   usleep(args[0]->Uint32Value());
 
-  return scope.Close(Undefined());
+  RETURN;
 }
 
 
