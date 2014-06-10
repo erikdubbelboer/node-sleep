@@ -6,14 +6,25 @@
 #include <node.h>
 
 
-// Node 0.11+
-#if (NODE_MODULE_VERSION > 0x000B)
+// Node 0.11.8 etc
+#if (NODE_MODULE_VERSION == 13)
+#define SCOPE Isolate* isolate = Isolate::GetCurrent(); \
+              HandleScope scope(isolate)
+#define EXCEPTION(str) ThrowException(Exception::TypeError(String::New(str))) 
+#define ARGUMENTS v8::FunctionCallbackInfo<Value>
+#define RETURNTYPE void
+#define RETURN
+
+// Node 0.11.13 etc
+#elif (NODE_MODULE_VERSION > 13)
 #define SCOPE Isolate* isolate = Isolate::GetCurrent(); \
               HandleScope scope(isolate)
 #define EXCEPTION(str) isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, str)))
-#define ARGUMENTS FunctionCallbackInfo<Value>
+#define ARGUMENTS v8::FunctionCallbackInfo<Value>
 #define RETURNTYPE void
 #define RETURN
+
+// Node 0.12 and below
 #else
 #define SCOPE HandleScope scope
 #define EXCEPTION(str) return ThrowException(Exception::TypeError(String::New(str))) 
