@@ -5,6 +5,7 @@
       'sources': [
         'sleep.cc',
       ],
+      "include_dirs": ["<!(node -e \"require('nan')\")"]
     }
   ]
 }

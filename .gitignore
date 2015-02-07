@@ -1,5 +1,2 @@
-.lock-wscript
 build
-Build
 node_modules
-lib/binding
