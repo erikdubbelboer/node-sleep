@@ -33,33 +33,35 @@ int usleep(unsigned __int64 usec)
 
 
 NAN_METHOD(Sleep) {
-  NanScope();
+  Nan::HandleScope scope;
 
-  if (args.Length() < 1 || !args[0]->IsUint32()) {
-    return NanThrowError("Expected number of seconds");
+  if (info.Length() < 1 || !info[0]->IsUint32()) {
+    return Nan::ThrowError("Expected number of seconds");
   }
 
-  sleep(args[0]->Uint32Value());
+  sleep(info[0]->Uint32Value());
 
-  NanReturnUndefined();
+  info.GetReturnValue().SetUndefined();
 }
 
 NAN_METHOD(USleep) {
-  NanScope();
+  Nan::HandleScope scope;
 
-  if (args.Length() < 1 || !args[0]->IsUint32()) {
-    return NanThrowError("Expected number of microseconds");
+  if (info.Length() < 1 || !info[0]->IsUint32()) {
+    return Nan::ThrowError("Expected number of microseconds");
   }
 
-  usleep(args[0]->Uint32Value());
+  usleep(info[0]->Uint32Value());
 
-  NanReturnUndefined();
+  info.GetReturnValue().SetUndefined();
 }
 
 
-void init(Handle<Object> exports) {
-  exports->Set(NanNew<String>("sleep"), NanNew<FunctionTemplate>(Sleep)->GetFunction());
-  exports->Set(NanNew<String>("usleep"), NanNew<FunctionTemplate>(USleep)->GetFunction());
+NAN_MODULE_INIT(init) {
+  Nan::Set(target, Nan::New<String>("sleep").ToLocalChecked(),
+    Nan::New<FunctionTemplate>(Sleep)->GetFunction());
+  Nan::Set(target, Nan::New<String>("usleep").ToLocalChecked(),
+    Nan::New<FunctionTemplate>(USleep)->GetFunction());
 }
 
 
