@@ -5,6 +5,7 @@
   "description": "Add sleep() and usleep() to nodejs",
   "homepage":    "http://github.com/ErikDubbelboer/node-sleep",
   "author":      "Erik Dubbelboer <erik@dubbelboer.com>",
+  "license":     "MIT",
   "engines" : { "node" : ">=0.4.0" },
   "keywords": [
     "sleep",
