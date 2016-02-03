@@ -2,7 +2,7 @@
 try {
   module.exports = require('./build/Release/node_sleep.node');
 } catch (e) {
-  console.log('sleep: using busy loop fallback');
+  console.error('sleep: using busy loop fallback');
 
   module.exports = {
     sleep: function(s) {
