@@ -18,5 +18,11 @@
   "dependencies": {
     "nan": ">=2.0.0"
   },
+  "bin": {
+    "sleep": "./bin/sleep",
+    "sleepuv": "./bin/sleep",
+    "usleep": "./bin/sleep",
+    "usleepuv": "./bin/sleep"
+  },
   "gypfile": true
 }
