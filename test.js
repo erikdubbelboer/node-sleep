@@ -1,5 +1,5 @@
 /* globals describe, it */
-var sleep = require('.');
+var sleep = require('./');
 var assert = require('assert');
 
 function assertApproxEqual(val1, val2) {
