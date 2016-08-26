@@ -3,7 +3,7 @@ var sleep = require('.');
 var assert = require('assert');
 
 function assertApproxEqual(val1, val2) {
-  var epsilon = 5; // number of milliseconds of variation we allow
+  var epsilon = 1; // we require accuracy to the nearest millisecond
   var diff = Math.abs(val1 - val2);
   assert.ok(diff <= epsilon);
 }
