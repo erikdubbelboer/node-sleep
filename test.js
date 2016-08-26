@@ -1,12 +1,58 @@
+/* globals describe, it */
+var sleep = require('.');
+var assert = require('assert');
 
-var sleep = require('./');
+function assertApproxEqual(val1, val2) {
+  var epsilon = 5; // number of milliseconds of variation we allow
+  var diff = Math.abs(val1 - val2);
+  assert.ok(diff <= epsilon);
+}
 
-console.log('sleeping for 1 seconds...');
-sleep.sleep(1);
-console.log('done');
+describe('sleep', function () {
+  it('works for normal input', function () {
+    var sleepTime = 1;
+    var start = new Date();
+    sleep.sleep(sleepTime);
+    var end = new Date();
+    assertApproxEqual(end - start, sleepTime * 1000);
+  });
 
+  it('works for zero', function () {
+    var sleepTime = 0;
+    var start = new Date();
+    sleep.sleep(sleepTime);
+    var end = new Date();
+    assertApproxEqual(end - start, sleepTime * 1000);
+  });
 
-console.log('sleeping for 2000000 microseconds (2 seconds)');
-sleep.usleep(2000000);
-console.log('done');
+  it('does not allow negative numbers', function () {
+    assert.throws(function () {
+      sleep.sleep(-1);
+    });
+  });
+});
 
+describe('usleep', function () {
+  it('works for values smaller than a second', function () {
+    var sleepTime = 30;
+    var start = new Date();
+    sleep.usleep(sleepTime);
+    var end = new Date();
+    assertApproxEqual(end - start, sleepTime / 1000);
+  });
+
+  it('works for values larger than a second', function () {
+    this.timeout(4000); // necessary for mocha to not complain
+    var sleepTime = 3000000;
+    var start = new Date();
+    sleep.usleep(sleepTime);
+    var end = new Date();
+    assertApproxEqual(end - start, sleepTime / 1000);
+  });
+
+  it('does not allow negative numbers', function () {
+    assert.throws(function () {
+      sleep.usleep(-100);
+    });
+  });
+});
