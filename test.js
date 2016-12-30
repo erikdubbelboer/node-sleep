@@ -56,3 +56,25 @@ describe('usleep', function () {
     });
   });
 });
+
+describe('msleep', function () {
+  it('works for normal input', function() {
+    var sleepTime = 1;
+    var start = new Date();
+    sleep.msleep(sleepTime);
+    var end = new Date();
+    assertApproxEqual(end - start, sleepTime);
+  });
+
+  it('does not allow negative numbers', function () {
+    assert.throws(function () {
+      sleep.msleep(-100);
+    });
+  });
+
+  it('does not allow decimal numbers', function () {
+    assert.throws(function () {
+      sleep.msleep(1.5);
+    });
+  });
+});
