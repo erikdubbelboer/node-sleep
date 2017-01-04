@@ -1,7 +1,7 @@
 sleep
 =====
 
-Add [`sleep()`][1] and [`usleep()`][2] to Node.js, via a C++ binding.
+Add [`sleep()`][1], `msleep()` and [`usleep()`][2] to Node.js, via a C++ binding.
 
 This is mainly useful for debugging.
 
@@ -13,6 +13,7 @@ Usage
     var sleep = require('sleep');
 
 * `sleep.sleep(n)`: sleep for `n` seconds
+* `sleep.msleep(n)`: sleep for `n` miliseconds
 * `sleep.usleep(n)`: sleep for `n` microseconds (1 second is 1000000 microseconds)
 
 
