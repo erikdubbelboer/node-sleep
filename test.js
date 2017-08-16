@@ -1,11 +1,14 @@
 /* globals describe, it */
 var sleep = require('./');
 var assert = require('assert');
+var child_process = require('child_process');
 
 function assertApproxEqual(val1, val2) {
   var epsilon = 5; // we require accuracy to the nearest N millisecond
   var diff = Math.abs(val1 - val2);
-  assert.ok(diff <= epsilon);
+  if (diff > epsilon) {
+    assert.fail(diff, epsilon, 'wait was too short', '>');
+  }
 }
 
 describe('sleep', function () {
@@ -29,6 +32,15 @@ describe('sleep', function () {
     assert.throws(function () {
       sleep.sleep(-1);
     });
+  });
+
+  it('works with child_process', function () {
+    var sleepTime = 1;
+    child_process.exec('echo', function (err, stdout, stderr) { });
+    var start = new Date();
+    sleep.sleep(sleepTime);
+    var end = new Date();
+    assertApproxEqual(end - start, sleepTime * 1000);
   });
 });
 

@@ -9,59 +9,94 @@ using v8::String;
 
 
 #if defined _WIN32 || defined _WIN64
-unsigned int sleep(unsigned int seconds)
+
+NAN_METHOD(MSleep) {
 {
-    Sleep(seconds * 1000);
-    return 0;
-}
-int usleep(unsigned __int64 usec)
-{
-    LARGE_INTEGER li;
-    li.QuadPart = -10 * usec;     // negative values for relative time
-
-    HANDLE timer = CreateWaitableTimer(NULL, TRUE, NULL);
-    if(!timer) return -1;
-
-    SetWaitableTimer(timer, &li, 0, NULL, NULL, 0);
-    WaitForSingleObject(timer, INFINITE);
-    CloseHandle(timer);
-    return 0;
-}
-#else
-#   include <unistd.h>
-#endif
-
-
-NAN_METHOD(Sleep) {
   Nan::HandleScope scope;
 
   if (info.Length() < 1 || !info[0]->IsUint32()) {
     return Nan::ThrowError("Expected number of seconds");
   }
 
-  sleep(info[0]->Uint32Value());
+  Sleep(info[0]->Uint32Value() * 1000);
 
   info.GetReturnValue().SetUndefined();
 }
 
-NAN_METHOD(USleep) {
+NAN_METHOD(MUSleep) {
   Nan::HandleScope scope;
 
   if (info.Length() < 1 || !info[0]->IsUint32()) {
     return Nan::ThrowError("Expected number of microseconds");
   }
 
-  usleep(info[0]->Uint32Value());
+  LARGE_INTEGER li;
+  li.QuadPart = -10 * info[0]->IntegerValue(); // negative values for relative time
+
+  HANDLE timer = CreateWaitableTimer(NULL, TRUE, NULL);
+  if(!timer) return -1;
+
+  SetWaitableTimer(timer, &li, 0, NULL, NULL, 0);
+  WaitForSingleObject(timer, INFINITE);
+  CloseHandle(timer);
 
   info.GetReturnValue().SetUndefined();
 }
 
+#else
+
+#include <unistd.h>
+#include <sys/time.h>
+
+static void _sleep(useconds_t left) {
+  useconds_t done;
+  struct timeval start, end;
+
+  while (left > 0) {
+    gettimeofday(&start, NULL);
+    usleep(left);
+    gettimeofday(&end, NULL);
+
+    done = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
+    if (done > left) {
+      left = 0;
+    } else {
+      left -= done;
+    }
+   }
+}
+
+NAN_METHOD(MSleep) {
+  Nan::HandleScope scope;
+
+  if (info.Length() < 1 || !info[0]->IsUint32()) {
+    return Nan::ThrowError("Expected number of seconds");
+  }
+
+  _sleep(info[0]->Uint32Value() * 1000000);
+
+  info.GetReturnValue().SetUndefined();
+}
+
+NAN_METHOD(MUSleep) {
+  Nan::HandleScope scope;
+
+  if (info.Length() < 1 || !info[0]->IsUint32()) {
+    return Nan::ThrowError("Expected number of microseconds");
+  }
+
+  _sleep(info[0]->Uint32Value());
+
+  info.GetReturnValue().SetUndefined();
+}
+#endif
+
 
 NAN_MODULE_INIT(init) {
   Nan::Set(target, Nan::New<String>("sleep").ToLocalChecked(),
-    Nan::New<FunctionTemplate>(Sleep)->GetFunction());
+    Nan::New<FunctionTemplate>(MSleep)->GetFunction());
   Nan::Set(target, Nan::New<String>("usleep").ToLocalChecked(),
-    Nan::New<FunctionTemplate>(USleep)->GetFunction());
+    Nan::New<FunctionTemplate>(MUSleep)->GetFunction());
 }
 
 
