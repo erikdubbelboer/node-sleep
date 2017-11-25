@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ferikdubbelboer%2Fnode-sleep.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ferikdubbelboer%2Fnode-sleep?ref=badge_shield)
+
 sleep
 =====
 
@@ -19,3 +21,7 @@ Usage
 
 [1]: http://linux.die.net/man/3/sleep
 [2]: http://linux.die.net/man/3/usleep
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ferikdubbelboer%2Fnode-sleep.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ferikdubbelboer%2Fnode-sleep?ref=badge_large)
