@@ -7,7 +7,24 @@ Add [`sleep()`][1], `msleep()` and [`usleep()`][2] to Node.js, via a C++ binding
 
 This is mainly useful for debugging.
 
-**These calls will block execution of all JavaScript by halting Node.js' event loop!**
+These calls will block execution of all JavaScript by halting Node.js' event loop!
+==================================================================================
+
+Alternative
+-----------
+
+When using nodejs `9.3` or higher it's better to use [Atomics.wait](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Atomics/wait) which doesn't require compiling this C++
+module.
+The `sleep` and `msleep` functions can be implemented like this:
+```js
+function msleep(n) {
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, n);
+}
+function sleep(n) {
+  msleep(n*1000);
+}
+```
+If you require `usleep` this module is still required.
 
 Usage
 -----
