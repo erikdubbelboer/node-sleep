@@ -6,13 +6,11 @@
 #include <sys/time.h>
 
 void node_sleep(unsigned seconds) {
-{
 	// TODO implement, can be interrupted earlier
   sleep(seconds);
 }
 
-void node_usleep(unsigned usec)
-{
+void node_usleep(unsigned usec) {
   useconds_t done;
   struct timeval start, end;
 
