@@ -6,8 +6,11 @@
 #include <sys/time.h>
 
 void node_sleep(unsigned seconds) {
-	// TODO implement, can be interrupted earlier
-  sleep(seconds);
+  unsigned done = seconds;
+  while (done > 0)
+  {
+    done = sleep(done);
+  }
 }
 
 void node_usleep(unsigned usec) {
