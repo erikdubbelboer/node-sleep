@@ -11,11 +11,11 @@ using v8::String;
 #if defined _WIN32 || defined _WIN64
 
 NAN_METHOD(MSleep) {
-{
   Nan::HandleScope scope;
 
   if (info.Length() < 1 || !info[0]->IsUint32()) {
-    return Nan::ThrowError("Expected number of seconds");
+    Nan::ThrowError("Expected number of seconds");
+    return;
   }
 
   Sleep(info[0]->Uint32Value() * 1000);
@@ -27,14 +27,18 @@ NAN_METHOD(MUSleep) {
   Nan::HandleScope scope;
 
   if (info.Length() < 1 || !info[0]->IsUint32()) {
-    return Nan::ThrowError("Expected number of microseconds");
+    Nan::ThrowError("Expected number of microseconds");
+    return;
   }
 
   LARGE_INTEGER li;
   li.QuadPart = -10 * info[0]->IntegerValue(); // negative values for relative time
 
   HANDLE timer = CreateWaitableTimer(NULL, TRUE, NULL);
-  if(!timer) return -1;
+  if (!timer) {
+    Nan::ThrowError("Unable to create waitable timer");
+    return;
+  }
 
   SetWaitableTimer(timer, &li, 0, NULL, NULL, 0);
   WaitForSingleObject(timer, INFINITE);
@@ -63,14 +67,15 @@ static void _sleep(useconds_t left) {
     } else {
       left -= done;
     }
-   }
+  }
 }
 
 NAN_METHOD(MSleep) {
   Nan::HandleScope scope;
 
   if (info.Length() < 1 || !info[0]->IsUint32()) {
-    return Nan::ThrowError("Expected number of seconds");
+    Nan::ThrowError("Expected number of seconds");
+    return;
   }
 
   _sleep(info[0]->Uint32Value() * 1000000);
@@ -82,7 +87,8 @@ NAN_METHOD(MUSleep) {
   Nan::HandleScope scope;
 
   if (info.Length() < 1 || !info[0]->IsUint32()) {
-    return Nan::ThrowError("Expected number of microseconds");
+    Nan::ThrowError("Expected number of microseconds");
+    return;
   }
 
   _sleep(info[0]->Uint32Value());

@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/erikdubbelboer/node-sleep.png?branch=master)](https://travis-ci.org/erikdubbelboer/node-sleep)
+[![Build status](https://ci.appveyor.com/api/projects/status/09kubqqykjaxdrab?svg=true)](https://ci.appveyor.com/project/erikdubbelboer/node-sleep)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ferikdubbelboer%2Fnode-sleep.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ferikdubbelboer%2Fnode-sleep?ref=badge_shield)
 
 sleep
