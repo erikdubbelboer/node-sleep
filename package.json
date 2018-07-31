@@ -1,6 +1,6 @@
 {
   "name": "sleep",
-  "version": "5.2.2",
+  "version": "5.2.3",
   "main": "index.js",
   "description": "Add sleep() and usleep() to nodejs",
   "homepage": "http://github.com/erikdubbelboer/node-sleep",
