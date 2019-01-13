@@ -78,7 +78,7 @@ NAN_METHOD(MSleep) {
     return;
   }
 
-  _sleep(info[0]->Uint32Value() * 1000000);
+  _sleep(Nan::To<uint32_t>(info[0]).FromJust() * 1000000);
 
   info.GetReturnValue().SetUndefined();
 }
@@ -91,7 +91,7 @@ NAN_METHOD(MUSleep) {
     return;
   }
 
-  _sleep(info[0]->Uint32Value());
+  _sleep(Nan::To<uint32_t>(info[0]).FromJust());
 
   info.GetReturnValue().SetUndefined();
 }
