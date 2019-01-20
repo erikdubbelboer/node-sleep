@@ -4,10 +4,14 @@ var assert = require('assert');
 var child_process = require('child_process');
 
 function assertApproxEqual(val1, val2) {
-  var epsilon = 5; // we require accuracy to the nearest N millisecond
-  var diff = Math.abs(val1 - val2);
+  // We require accuracy to the nearest N millisecond.
+  // Windows Sleep is not super accurate (depends on scheduling policy) so use a high value.
+  var epsilon = 100;
+  var diff = val1 - val2;
   if (diff > epsilon) {
-    assert.fail(diff, epsilon, 'wait was too short', '>');
+    assert.fail(diff, epsilon, 'wait was too long');
+  } else if (diff < -epsilon) {
+    assert.fail(diff, epsilon, 'wait was too short');
   }
 }
 
@@ -46,7 +50,7 @@ describe('sleep', function () {
 
 describe('usleep', function () {
   it('works for values smaller than a second', function () {
-    var sleepTime = 30;
+    var sleepTime = 250;
     var start = new Date();
     sleep.usleep(sleepTime);
     var end = new Date();

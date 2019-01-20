@@ -9,10 +9,11 @@ NAN_METHOD(Sleep) {
   Nan::HandleScope scope;
 
   if (info.Length() < 1 || !info[0]->IsUint32()) {
-    return Nan::ThrowError("Expected number of seconds");
+    Nan::ThrowError("Expected number of seconds");
+    return;
   }
 
-  node_sleep(info[0]->Uint32Value());
+  node_sleep(Nan::To<uint32_t>(info[0]).FromJust());
 
   info.GetReturnValue().SetUndefined();
 }
@@ -21,10 +22,11 @@ NAN_METHOD(MUSleep) {
   Nan::HandleScope scope;
 
   if (info.Length() < 1 || !info[0]->IsUint32()) {
-    return Nan::ThrowError("Expected number of microseconds");
+    Nan::ThrowError("Expected number of microseconds");
+    return;
   }
 
-  node_usleep(info[0]->Uint32Value());
+  node_usleep(Nan::To<uint32_t>(info[0]).FromJust());
 
   info.GetReturnValue().SetUndefined();
 }
