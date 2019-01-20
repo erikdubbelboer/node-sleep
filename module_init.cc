@@ -5,19 +5,6 @@ using v8::Handle;
 using v8::Object;
 using v8::String;
 
-NAN_METHOD(Sleep) {
-  Nan::HandleScope scope;
-
-  if (info.Length() < 1 || !info[0]->IsUint32()) {
-    Nan::ThrowError("Expected number of seconds");
-    return;
-  }
-
-  node_sleep(Nan::To<uint32_t>(info[0]).FromJust());
-
-  info.GetReturnValue().SetUndefined();
-}
-
 NAN_METHOD(MUSleep) {
   Nan::HandleScope scope;
 
@@ -32,8 +19,6 @@ NAN_METHOD(MUSleep) {
 }
 
 NAN_MODULE_INIT(init) {
-  Nan::Set(target, Nan::New<String>("sleep").ToLocalChecked(),
-    Nan::New<FunctionTemplate>(Sleep)->GetFunction());
   Nan::Set(target, Nan::New<String>("usleep").ToLocalChecked(),
     Nan::New<FunctionTemplate>(MUSleep)->GetFunction());
 }

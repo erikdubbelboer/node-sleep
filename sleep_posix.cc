@@ -5,14 +5,6 @@
 #include <unistd.h>
 #include <sys/time.h>
 
-void node_sleep(unsigned seconds) {
-  unsigned done = seconds;
-  while (done > 0)
-  {
-    done = sleep(done);
-  }
-}
-
 void node_usleep(unsigned usec) {
   useconds_t done;
   struct timeval start, end;

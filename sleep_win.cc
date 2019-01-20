@@ -4,10 +4,6 @@
 
 #include <windows.h>
 
-void node_sleep(unsigned seconds) {
-  Sleep(seconds * 1000);
-}
-
 void node_usleep(unsigned usec) {
   LARGE_INTEGER li;
   li.QuadPart = -10 * usec; // negative values for relative time
