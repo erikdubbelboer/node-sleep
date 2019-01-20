@@ -3,6 +3,6 @@
 
 #include <nan.h>
 
-void node_usleep(unsigned usec);
+void node_usleep(uint32_t usec);
 
 #endif // SLEEP_H

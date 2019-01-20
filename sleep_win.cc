@@ -4,9 +4,9 @@
 
 #include <windows.h>
 
-void node_usleep(unsigned usec) {
+void node_usleep(uint32_t usec) {
   LARGE_INTEGER li;
-  li.QuadPart = -10 * usec; // negative values for relative time
+  li.QuadPart = -10LL * usec; // negative values for relative time
 
   HANDLE timer = CreateWaitableTimer(NULL, TRUE, NULL);
   if(!timer) return;

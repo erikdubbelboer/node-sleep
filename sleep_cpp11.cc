@@ -5,7 +5,7 @@
 #include <thread>
 #include <chrono>
 
-void node_usleep(unsigned usec) {
+void node_usleep(uint32_t usec) {
   std::this_thread::sleep_for(std::chrono::microseconds(usec));
 }
 

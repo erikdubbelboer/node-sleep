@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 
-void node_usleep(unsigned usec) {
+void node_usleep(uint32_t usec) {
   useconds_t done;
   struct timeval start, end;
 
