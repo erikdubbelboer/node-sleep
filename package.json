@@ -21,10 +21,10 @@
     "url": "https://github.com/erikdubbelboer/node-sleep.git"
   },
   "dependencies": {
-    "nan": ">=2.12.1"
+    "nan": "^2.12.1"
   },
   "devDependencies": {
-    "mocha": "^4.0.1"
+    "mocha": "^4.1.0"
   },
   "gypfile": true
 }
