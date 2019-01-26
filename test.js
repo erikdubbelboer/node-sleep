@@ -9,9 +9,9 @@ function assertApproxEqual(val1, val2) {
   var epsilon = 100;
   var diff = val1 - val2;
   if (diff > epsilon) {
-    assert.fail(diff, epsilon, 'wait was too long');
+    assert.fail('wait was too long: ' + diff + ' > ' + epsilon);
   } else if (diff < -epsilon) {
-    assert.fail(diff, epsilon, 'wait was too short');
+    assert.fail('wait was too long: ' + diff + ' < ' + -epsilon);
   }
 }
 
