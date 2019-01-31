@@ -9,6 +9,8 @@ Add [`sleep()`][1], `msleep()` and [`usleep()`][2] to Node.js, via a C++ binding
 
 This is mainly useful for debugging.
 
+Note that because this is a C++ module, it will need to be built on the system you are going to use it on.
+
 These calls will block execution of all JavaScript by halting Node.js' event loop!
 ==================================================================================
 
