@@ -24,7 +24,7 @@
     "nan": "^2.13.2"
   },
   "devDependencies": {
-    "mocha": "^4.1.0"
+    "mocha": "^6.1.4"
   },
   "gypfile": true
 }
