@@ -57,6 +57,14 @@ describe('usleep', function () {
     assertApproxEqual(end - start, sleepTime / 1000);
   });
 
+  it('works for zero', function () {
+    var sleepTime = 0;
+    var start = new Date();
+    sleep.usleep(sleepTime);
+    var end = new Date();
+    assertApproxEqual(end - start, sleepTime / 1000);
+  });
+
   it('works for values larger than a second', function () {
     this.timeout(4000); // necessary for mocha to not complain
     var sleepTime = 3000000;
@@ -76,6 +84,14 @@ describe('usleep', function () {
 describe('msleep', function () {
   it('works for normal input', function() {
     var sleepTime = 1;
+    var start = new Date();
+    sleep.msleep(sleepTime);
+    var end = new Date();
+    assertApproxEqual(end - start, sleepTime);
+  });
+
+  it('works for zero', function () {
+    var sleepTime = 0;
     var start = new Date();
     sleep.msleep(sleepTime);
     var end = new Date();

@@ -9,7 +9,7 @@ sleep.sleep = function(seconds) {
 
 
 sleep.msleep = function(miliseconds) {
-  if (miliseconds < 1 || miliseconds % 1 != 0) {
+  if (miliseconds < 0 || miliseconds % 1 != 0) {
     throw new Error('Expected number of miliseconds');
   }
   sleep.usleep(miliseconds * 1000);
