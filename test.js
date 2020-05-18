@@ -94,3 +94,14 @@ describe('msleep', function () {
     });
   });
 });
+
+describe('error', function () {
+  it('should throw a valid error', function () {
+    try {
+      sleep.msleep(Infinity);
+    }
+    catch (e) {
+      assert.equal(e.message, 'Expected number of miliseconds');
+    }
+  });
+});
