@@ -1,6 +1,6 @@
 {
   "name": "sleep",
-  "version": "6.2.0",
+  "version": "6.3.0",
   "main": "index.js",
   "description": "Add sleep() and usleep() to nodejs",
   "homepage": "http://github.com/erikdubbelboer/node-sleep",
@@ -21,10 +21,10 @@
     "url": "https://github.com/erikdubbelboer/node-sleep.git"
   },
   "dependencies": {
-    "nan": "^2.13.2"
+    "nan": "^2.14.1"
   },
   "devDependencies": {
-    "mocha": "^7.1.2"
+    "mocha": "^8.0.1"
   },
   "gypfile": true
 }
